@@ -1,0 +1,95 @@
+.register {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #0071c2, #003580);
+    font-family: Arial, sans-serif;
+  }
+  
+  .rContainer {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 300px;
+  }
+  
+  .rTitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #003580;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .rInput {
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .genderContainer {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .rRadio {
+    margin-right: 5px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .rButton {
+    flex: 1;
+    border: none;
+    padding: 10px 20px;
+    background-color: #0071c2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .rButton:hover {
+    background-color: #005bb5;
+  }
+  
+  .rButton:disabled {
+    background-color: #0071c28c;
+    cursor: not-allowed;
+  }
+  
+  .rError {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .googleRegister {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .googleButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .forgotPassword {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
