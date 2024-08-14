@@ -1,0 +1,98 @@
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .userContainer {
+    display: flex;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 1000px;
+    max-width: 100%;
+    margin-top: 70px; /* to account for the navbar */
+  }
+  
+  .userLeft {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-right: 1px solid #ccc;
+    padding-right: 20px;
+  }
+  
+  .userIcon {
+    font-size: 100px;
+    color: #0071c2;
+    margin-bottom: 10px;
+  }
+  
+  .userInfo {
+    margin-bottom: 20px;
+  }
+  
+  .userRight {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+  }
+  
+  .userButton {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #0071c2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .userButton:hover {
+    background-color: #005fa3;
+  }
+  
+  .userForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .userInput {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .userBookings,
+  .userWishlist {
+    margin-top: 20px;
+  }
+  
+  .userBookings ul,
+  .userWishlist ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .userBookings li,
+  .userWishlist li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .userBookings li p,
+  .userWishlist li p {
+    margin: 5px 0;
+  }
+  
