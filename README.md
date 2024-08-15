@@ -1,5 +1,10 @@
 # Getting Started with Create React App
 
+#============================================
+## what did i update on 6.5
+
+### only profile but there still need more work to do 
+#============================================
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
