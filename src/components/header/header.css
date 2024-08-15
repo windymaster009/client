@@ -1,5 +1,5 @@
 .header {
-  background-image: linear-gradient(to bottom, #006CE4, #ffffff);
+  background-image: linear-gradient(to bottom, #003580, #0071c2);
   color: #fff;
   display: flex;
   justify-content: center;
@@ -40,6 +40,7 @@
   color: #ffffff;
   font-weight: 600;
   background-color: #006CE4;
+  border: 5px solid #ffffff;
   padding: 15px 25px;
   cursor: pointer;
   transition: background-color 0.3s ease;
