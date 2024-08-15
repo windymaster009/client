@@ -45,7 +45,7 @@ const Register = () => {
       console.error(err);
     }
   };
-  
+
   const handleGoogleFailure = (response) => {
     console.error("Google Registration Failed", response);
   };

@@ -87,7 +87,8 @@ const Login = () => {
         {error && <span className="lError">{error.message}</span>}
         <div className="googleLogin">
           <GoogleLogin
-            clientId="1024106569318-5hlbu74tfugfq5n3sm4ihai22vtjr16o.apps.googleusercontent.com" // Replace with your Google Client ID            buttonText="Login with Google"
+            clientId="YOUR_GOOGLE_CLIENT_ID"
+            buttonText="Login with Google"
             onSuccess={handleGoogleSuccess}
             onFailure={handleGoogleFailure}
             cookiePolicy={'single_host_origin'}

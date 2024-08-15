@@ -6,7 +6,6 @@ import MailList from "../../components/mailList/MailList";
 import Discounts from "../offers/dis";
 import Navbar from "../../components/navbar/Navbar";
 import PropertyList from "../../components/propertyList/PropertyList";
-import Detail from "../../pages/offers/detail";
 import "./home.css";
 
 const Home = () => {
@@ -15,8 +14,7 @@ const Home = () => {
       <Navbar />
       <Header />
       <div className="homeContainer">
-        <Detail />
-        <div className="homeHeader">
+      <div className="homeHeader">
           <h1 className="homeTitle">Offers</h1>
           <p className="homeDesc">Promotions, deals and special offers for you</p>
         </div>
