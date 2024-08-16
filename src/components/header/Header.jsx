@@ -111,7 +111,7 @@ const Header = ({ type }) => {
               more with a free Lamabooking account
             </p>
             {!user && (
-              <button className="headerBtn">Sign in / Register</button>
+              <button className="headerBtn">Pleasse login for booking</button>
             )}
             <div className="headerSearch">
               <div className="headerSearchItem">

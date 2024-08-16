@@ -9,7 +9,10 @@ import List from "./pages/list/List";
 import Login from "./pages/login/Login";
 import Register from "./pages/login/register";
 import User from "./pages/user/user";
-import Hotels from "./pages/list/hotels"
+import Hotels from "./pages/list/hotels";
+import Profile from "./pages/user/profile";
+
+import Predetail from "./pages/user/per-detail";
 
 
 
@@ -29,6 +32,8 @@ function App() {
         <Route path="/list" element={<List/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/hotelslist" element={<Hotels/>}/>
+        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/perdetail" element={<Predetail/>}/>
 
         <Route path="/properties/:type" element={<PropertyListByType />} />
       </Routes>
