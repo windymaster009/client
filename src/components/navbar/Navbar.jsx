@@ -136,13 +136,14 @@ const Navbar = () => {
           <img src={logo} alt="Logo" className="logo" />
         </Link>
         <div className="navItems">
-          <div className="navItem">
+        <a href="/list-your-property">List your property</a>
+          {/* <div className="navItem">
             <BsFillFlagFill className="icon" />
             <span className="navText">KHR</span>
-          </div>
-          <div className="navItem">
+          </div> */}
+          {/* <div className="navItem">
             <BsFillFlagFill className="icon" />
-          </div>
+          </div> */}
           <div className="navItem">
             <FaRegBell className="icon" />
             <span className="notification">2</span>
@@ -151,7 +152,7 @@ const Navbar = () => {
             <FiUser className="icon" />
             {showDropdown && (
               <div className="dropdown-menu">
-                <Link to="/user" className="dropdown-item">
+                <Link to="/perdetail" className="dropdown-item">
                   Profile
                 </Link>
                 <Link to="/booking" className="dropdown-item">
@@ -164,7 +165,7 @@ const Navbar = () => {
             )}
           </div>
           {user ? (
-            <Link to="/user" style={{ color: "inherit", textDecoration: "none" }}>
+            <Link to="/perdetail" style={{ color: "inherit", textDecoration: "none" }}>
               <span className="username">{user.username}</span>
             </Link>
           ) : (

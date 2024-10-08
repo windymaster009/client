@@ -151,7 +151,7 @@
   top: 60px;
   left: 0;
   width: 100%;
-  background-color: #fff;
+  background-color: #FFB700;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   z-index: 100;
@@ -171,7 +171,7 @@
 }
 
 .dropdown li:hover {
-  background-color: #f0f0f0;
+  background-color: #33a6f3;
 }
 
 .dropdown img {

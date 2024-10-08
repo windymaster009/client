@@ -7,11 +7,6 @@ import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
-import React from 'react';
-// import Navbar from '../../components/navbar/Navbar';
-// import Header from '../../components/header/Header';
-import MailList from '../../components/mailList/MailList'; // Adjust the import path as needed
-import './list.css';
 
 const List = () => {
   const location = useLocation();
@@ -23,7 +18,7 @@ const List = () => {
   const [max, setMax] = useState(undefined);
 
   const { data, loading, error, reFetch } = useFetch(
-    `/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
+    `/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`
   );
 
   const handleClick = () => {
@@ -35,17 +30,12 @@ const List = () => {
       <Navbar />
       <Header type="list" />
       <div className="listContainer">
-        
         <div className="listWrapper">
           <div className="listSearch">
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
               <label>Destination</label>
-              <input
-                placeholder={destination}
-                type="text"
-                onChange={(e) => setDestination(e.target.value)}
-              />
+              <input placeholder={destination} type="text" />
             </div>
             <div className="lsItem">
               <label>Check-in Date</label>
@@ -120,24 +110,15 @@ const List = () => {
               "loading"
             ) : (
               <>
-                {data.length === 0 ? (
-                  <div className="error">
-                    <h2>No results found</h2>
-                    <p>We couldn't find any results for your search. Please try again with different criteria.</p>
-                  </div>
-                ) : (
-                  data.map((item) => <SearchItem item={item} key={item._id} />)
-                )}
+                {data.map((item) => (
+                  <SearchItem item={item} key={item._id} />
+                ))}
               </>
-              
             )}
-         
           </div>
-        </div>      
+        </div>
       </div>
-      <MailList /> 
     </div>
-    
   );
 };
 

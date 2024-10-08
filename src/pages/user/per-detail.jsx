@@ -11,9 +11,18 @@ const User = () => {
   const [userInfo, setUserInfo] = useState({
     username: "",
     email: "",
+    gender: "",
+    dateOfBirth: "",
+    phone: "",
+    profilePicture: "",
     currentPassword: "",
     newPassword: "",
   });
+  const [passwordInfo, setPasswordInfo] = useState({
+    oldPassword: "",
+    newPassword: ""
+  });
+  const [nationalIdPreview, setNationalIdPreview] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
@@ -22,6 +31,10 @@ const User = () => {
       setUserInfo({
         username: user.username,
         email: user.email,
+        gender: user.gender || "",
+        dateOfBirth: user.dateOfBirth || "",
+        phone: user.phone || "",
+        profilePicture: user.profilePicture || "",
         currentPassword: "",
         newPassword: "",
       });
@@ -52,12 +65,45 @@ const User = () => {
     setUserInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handlePasswordChangeInput = (e) => {
+    setPasswordInfo({
+      ...passwordInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+    // Implement your password change logic here
+    alert("Password changed successfully!");
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNationalIdPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleVerify = () => {
+    // Implement your verification logic here
+    alert("National ID verified successfully!");
+  };
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.put(`/user/update/${user._id}`, {
         username: userInfo.username,
         email: userInfo.email,
+        gender: userInfo.gender,
+        dateOfBirth: userInfo.dateOfBirth,
+        phone: userInfo.phone,
+        profilePicture: userInfo.profilePicture,
         currentPassword: userInfo.currentPassword,
         newPassword: userInfo.newPassword,
       });
@@ -88,6 +134,26 @@ const User = () => {
                 onChange={handleChange}
                 className="userInput"
               />
+              <label>Gender</label>
+              <select
+                name="gender"
+                value={userInfo.gender}
+                onChange={handleChange}
+                className="userInput"
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <label>Date of Birth</label>
+              <input
+                type="date"
+                name="dateOfBirth"
+                value={userInfo.dateOfBirth}
+                onChange={handleChange}
+                className="userInput"
+              />
               <label>Email</label>
               <input
                 type="email"
@@ -96,23 +162,22 @@ const User = () => {
                 onChange={handleChange}
                 className="userInput"
               />
-              <label>Current Password</label>
+              <label>Phone</label>
               <input
-                type="password"
-                name="currentPassword"
-                value={userInfo.currentPassword}
+                type="text"
+                name="phone"
+                value={userInfo.phone}
                 onChange={handleChange}
                 className="userInput"
-                placeholder="Enter current password"
               />
-              <label>New Password</label>
+              <label>Profile Picture</label>
               <input
-                type="password"
-                name="newPassword"
-                value={userInfo.newPassword}
+                type="text"
+                name="profilePicture"
+                value={userInfo.profilePicture}
                 onChange={handleChange}
                 className="userInput"
-                placeholder="Enter new password"
+                placeholder="Enter URL of your profile picture"
               />
               <button type="submit" className="userButton">
                 Update
@@ -123,13 +188,68 @@ const User = () => {
       case "security":
         return (
           <div className="userContent">
-            <div className="userContentHeader">
-              <FaLock className="userContentIcon" />
-              <h3>Security</h3>
-            </div>
-            <p>Change your security settings, set up secure authentication or delete your account.</p>
-            <button className="userButton">Manage account security</button>
+          <div className="userContentHeader">
+            <FaLock className="userContentIcon" />
+            <h3>Security</h3>
           </div>
+          <p>Manage your security settings and protect your account.</p>
+
+          {/* Change Password Section */}
+          <div className="security-section">
+            <h4>Change Password</h4>
+            <form className="passwordForm" onSubmit={handlePasswordChange}>
+              <label>Old Password</label>
+              <input
+                type="password"
+                name="oldPassword"
+                value={passwordInfo.oldPassword}
+                onChange={handlePasswordChangeInput}
+                className="userInput longInput"
+                placeholder="Old Password"
+              />
+              <label>New Password</label>
+              <input
+                type="password"
+                name="newPassword"
+                value={passwordInfo.newPassword}
+                onChange={handlePasswordChangeInput}
+                className="userInput longInput"
+                placeholder="New Password"
+              />
+              <button type="submit" className="userButton">Change Password</button>
+            </form>
+          </div>
+
+          {/* Two-factor Authentication Section */}
+          {/* <div className="security-section">
+            <h4>Two-factor Authentication</h4>
+            <button className="userButton">Set Up 2FA</button>
+          </div> */}
+
+          {/* Active Sessions Section */}
+          {/* <div className="security-section">
+            <h4>Active Sessions</h4>
+            <button className="userButton">Sign Out of All Sessions</button>
+          </div> */}
+
+          {/* Delete Account Section */}
+          {/* <div className="security-section">
+            <h4>Delete Account</h4>
+            <button className="deleteButton">Delete Account</button>
+          </div> */}
+
+          {/* Verify (National ID) Section */}
+          {/* <div className="security-section">
+            <h4>Verify (National ID)</h4>
+            <input type="file" className="userInput" onChange={handleFileChange} />
+            {nationalIdPreview && (
+              <div className="image-preview">
+                <img src={nationalIdPreview} alt="National ID Preview" />
+                <button className="userButton" onClick={handleVerify}>Confirm</button>
+              </div>
+            )}
+          </div> */}
+        </div>
         );
       case "otherTravellers":
         return (

@@ -5,12 +5,10 @@ import { AuthContext } from "../../context/AuthContext";
 import { GoogleLogin } from 'react-google-login';
 import "./register.css";
 
+
 const Register = () => {
   const [credentials, setCredentials] = useState({
-    usernameOrEmail: "",
-    firstName: "",
-    lastName: "",
-    gender: "",
+    username: "", // Changed from usernameOrEmail to username
     phone: "",
     password: "",
     confirmPassword: "",
@@ -30,10 +28,11 @@ const Register = () => {
       return;
     }
     try {
-      await axios.post("/auth/register", credentials);
+      const response = await axios.post("/auth/register", credentials);
+      console.log('Registration Success:', response.data);
       navigate("/login");
     } catch (err) {
-      console.error(err);
+      console.error('Registration Error:', err.response?.data || err.message);
     }
   };
 
@@ -42,10 +41,10 @@ const Register = () => {
       const res = await axios.post("/auth/google/register", { token: response.tokenId });
       navigate("/login");
     } catch (err) {
-      console.error(err);
+      console.error("Google Registration Failed", err);
     }
   };
-  
+
   const handleGoogleFailure = (response) => {
     console.error("Google Registration Failed", response);
   };
@@ -56,52 +55,12 @@ const Register = () => {
         <h1 className="rTitle">Register</h1>
         <input
           type="text"
-          placeholder="Username or Email"
-          id="usernameOrEmail"
+          placeholder="Username"
+          id="username" // Changed id to match backend
           onChange={handleChange}
           className="rInput"
-          value={credentials.usernameOrEmail}
+          value={credentials.username}
         />
-        <input
-          type="text"
-          placeholder="First Name"
-          id="firstName"
-          onChange={handleChange}
-          className="rInput"
-          value={credentials.firstName}
-        />
-        <input
-          type="text"
-          placeholder="Last Name"
-          id="lastName"
-          onChange={handleChange}
-          className="rInput"
-          value={credentials.lastName}
-        />
-        <div className="genderContainer">
-          <label>
-            <input
-              type="radio"
-              id="gender"
-              name="gender"
-              value="male"
-              onChange={handleChange}
-              className="rRadio"
-            />
-            Male
-          </label>
-          <label>
-            <input
-              type="radio"
-              id="gender"
-              name="gender"
-              value="female"
-              onChange={handleChange}
-              className="rRadio"
-            />
-            Female
-          </label>
-        </div>
         <input
           type="text"
           placeholder="Phone Number"
@@ -140,9 +99,6 @@ const Register = () => {
           >
             Back to Login
           </button>
-        </div>
-        <div className="forgotPassword">
-          <a href="/forgot-password">Forgot Password?</a>
         </div>
         {error && <span className="rError">{error.message}</span>}
         <div className="googleRegister">
