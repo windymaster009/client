@@ -151,7 +151,7 @@ const Navbar = () => {
             <FiUser className="icon" />
             {showDropdown && (
               <div className="dropdown-menu">
-                <Link to="/user" className="dropdown-item">
+                <Link to="/perdetail" className="dropdown-item">
                   Profile
                 </Link>
                 <Link to="/booking" className="dropdown-item">
@@ -164,7 +164,7 @@ const Navbar = () => {
             )}
           </div>
           {user ? (
-            <Link to="/user" style={{ color: "inherit", textDecoration: "none" }}>
+            <Link to="/perdetail" style={{ color: "inherit", textDecoration: "none" }}>
               <span className="username">{user.username}</span>
             </Link>
           ) : (

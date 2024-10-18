@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.account-settings {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.account-settings h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.account-settings p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.settings-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+.setting {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    width: 490px;
+    box-sizing: border-box;
+}
+
+.setting .icon {
+    font-size: 2rem;
+    color: #007bff;
+    margin-right: 10px;
+}
+
+.setting h2 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.setting p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    
+}
+
+.manage-link {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.manage-link:hover {
+    background-color: #0056b3;
+    color: #e6e6e6;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .settings-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .setting {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #f2f2f2;
+    margin-top: 50px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    font-size: 0.8rem;
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #097efc;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #666;
+}

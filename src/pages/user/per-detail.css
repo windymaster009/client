@@ -1,0 +1,171 @@
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.userContainer {
+  display: flex;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 1000px;
+  max-width: 100%;
+  margin-top: 70px; /* to account for the navbar */
+}
+
+.userLeft {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-right: 1px solid #ccc;
+  padding-right: 20px;
+}
+
+.userIcon {
+  font-size: 100px;
+  color: #0071c2;
+  margin-bottom: 10px;
+}
+
+.userInfo {
+  margin-bottom: 20px;
+}
+
+.userRight {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.userButton {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  text-align: left;
+}
+
+.userButton:hover {
+  background-color: #005fa3;
+}
+
+.userForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.userInput {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.userContent {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.userContentHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.userContentIcon {
+  font-size: 24px;
+  color: #0071c2;
+  margin-right: 10px;
+}
+.security-section {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.security-section h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.passwordForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increase the gap between password fields */
+}
+
+.passwordForm label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.longInput {
+  width: 100%;
+}
+
+.userInput {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%; /* Ensure the width is 100% */
+  box-sizing: border-box; /* Include padding and border in the width */
+}
+
+.image-preview {
+  margin-top: 10px;
+}
+
+.image-preview img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.userButton {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  text-align: left;
+}
+
+.deleteButton {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #d9534f;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  text-align: left;
+}
+
+.deleteButton:hover {
+  background-color: #c9302c;
+}
+
+.userButton:hover {
+  background-color: #005fa3;
+}

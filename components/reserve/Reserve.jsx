@@ -53,6 +53,19 @@ const Reserve = ({ setOpen, hotelId }) => {
 
   const handleClick = async () => {
     try {
+      const reservationData = {
+        user: currentUser._id, // Ensure you have the logged-in user's ID
+        hotel: hotelId,
+        room: selectedRooms, // The selected room IDs
+        checkInDate: dates[0].startDate, // Assuming you're using a date picker
+        checkOutDate: dates[0].endDate,
+        guests: 1, // This can be dynamic based on user input
+      };
+  
+      // Create the reservation by making a POST request to your API
+      await axios.post("/api/reservations", reservationData);
+  
+      // Handle room availability updates
       await Promise.all(
         selectedRooms.map((roomId) => {
           const res = axios.put(`/rooms/availability/${roomId}`, {
@@ -63,8 +76,11 @@ const Reserve = ({ setOpen, hotelId }) => {
       );
       setOpen(false);
       navigate("/");
-    } catch (err) {}
+    } catch (err) {
+      console.error(err);
+    }
   };
+  
   return (
     <div className="reserve">
       <div className="rContainer">
