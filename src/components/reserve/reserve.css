@@ -1,7 +1,8 @@
+/* Fullscreen overlay */
 .reserve {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.418);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   left: 0;
@@ -10,69 +11,272 @@
   justify-content: center;
 }
 
+/* Reservation container */
 .rContainer {
-  background-color: white;
-  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
   position: relative;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  max-height: 80vh; /* Limits the height of the modal */
+  overflow-y: auto; /* Enables vertical scrolling when content exceeds */
 }
 
+/* Custom scrollbar styling */
+.rContainer::-webkit-scrollbar {
+  width: 10px;
+}
+
+.rContainer::-webkit-scrollbar-thumb {
+  background-color: #0071c2;
+  border-radius: 5px;
+}
+
+.rContainer::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Close button styling */
 .rClose {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
   cursor: pointer;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.rClose:hover {
+  color: #555;
+}
+
+/* Room item container with fixed height and scroll */
+.rItemContainer {
+  max-height: 300px; /* Adjust as needed */
+  overflow-y: auto; /* Enables scrolling within the room list */
+}
+
+.rItemContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rItemContainer::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+.rItemContainer::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Room item styling */
+.rItem {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.rItem:hover {
+  transform: scale(1.02);
+}
+
+/* Room info section */
+.rItemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #333;
+}
+.messagePopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.messageContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  text-align: center;
+}
+
+.messagePopup button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.messagePopup.success {
+  background-color: rgba(0, 128, 0, 0.7);
+}
+
+.messagePopup .closeMessageBtn {
+  background-color: #f44336;
+}
+
+/* Other existing styles remain unchanged */
+/* Reserve button styling */
+.rButton {
+  background-color: #0071c2; /* Primary blue color */
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.rButton:hover {
+  background-color: #005a8c; /* Darker blue when hovered */
+  transform: scale(1.05); /* Slightly enlarges the button on hover */
+}
+
+.rButton:disabled {
+  background-color: #ccc; /* Gray out button when disabled */
+  cursor: not-allowed; /* Prevent pointer on disabled */
+  transform: none; /* Remove hover effect */
+}
+
+/* Cancel button styling */
+.cancelButton {
+  background-color: #f44336; /* Red color for cancellation */
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.cancelButton:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+  transform: scale(1.05);
+}
+.room {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.room label {
+  margin-right: 10px;
+}
+
+.selectedIcon {
+  color: green;
+  margin-left: 10px;
+}
+
+.rSelectRooms input[type="checkbox"]:checked {
+  background-color: #4CAF50;  /* Change background color when checked */
 }
 
 .rItem {
-  display: flex;
-  align-items: center;
-  gap: 50px;
-  padding: 20px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+  position: relative;
 }
 
-.rInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.rSelectRooms input:disabled {
+  opacity: 0.5;
 }
 
-.rTitle {
-  font-weight: 500;
-}
-
-.rDesc {
-  font-weight: 300;
-}
-
-.rMax {
-  font-size: 12px;
-}
-
-.rPrice {
-  font-weight: 500;
-}
-
-.rSelectRooms{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  font-size: 8px;
-  color: gray;
-}
-
-.room{
-  display: flex;
-  flex-direction: column;
+.totalPrice {
+  font-size: 18px;
+  margin-top: 20px;
 }
 
 .rButton {
-  border: none;
-  padding: 10px 20px;
-  background-color: #0071c2;
+  background-color: #4CAF50;
   color: white;
-  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
   cursor: pointer;
+  font-size: 16px;
+}
+
+.cancelButton {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.messagePopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
   border-radius: 5px;
-  width: 100%;
+  z-index: 1000;
+}
+
+.messagePopup.error {
+  background-color: red;
+}
+
+.messagePopup.success {
+  background-color: green;
+}
+
+.closeMessageBtn {
+  color: white;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+.rSelectedRooms {
   margin-top: 20px;
+  font-size: 16px;
+}
+
+.selectedRoomsRow {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping if there are too many items */
+  gap: 10px; /* Space between selected rooms */
+}
+
+.selectedRoom {
+  background-color: #f0f0f0;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
 }

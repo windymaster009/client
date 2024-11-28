@@ -2,17 +2,12 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { GoogleLogin } from 'react-google-login';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import "./login.css";
 
 const Login = () => {
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-  });
-
+  const [credentials, setCredentials] = useState({ username: "", password: "" });
   const { loading, error, dispatch } = useContext(AuthContext);
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -27,23 +22,21 @@ const Login = () => {
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       navigate("/");
     } catch (err) {
+      console.error("Login Error:", err);
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
   };
 
-  const handleGoogleSuccess = async (response) => {
+  const handleGoogleSuccess = async (credentialResponse) => {
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("/auth/google", { token: response.tokenId });
+      const res = await axios.post("/auth/google", { token: credentialResponse.credential });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       navigate("/");
     } catch (err) {
+      console.error("Google Login Error:", err);
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
-  };
-
-  const handleGoogleFailure = (response) => {
-    console.error("Google Login Failed", response);
   };
 
   return (
@@ -67,17 +60,10 @@ const Login = () => {
           value={credentials.password}
         />
         <div className="buttonContainer">
-          <button
-            disabled={loading}
-            onClick={handleClick}
-            className="lButton"
-          >
+          <button disabled={loading} onClick={handleClick} className="lButton">
             Login
           </button>
-          <button
-            onClick={() => navigate("/register")}
-            className="lButton registerButton"
-          >
+          <button onClick={() => navigate("/register")} className="lButton registerButton">
             Register
           </button>
         </div>
@@ -86,13 +72,9 @@ const Login = () => {
         </div>
         {error && <span className="lError">{error.message}</span>}
         <div className="googleLogin">
-          <GoogleLogin
-            clientId="1024106569318-5hlbu74tfugfq5n3sm4ihai22vtjr16o.apps.googleusercontent.com" // Replace with your Google Client ID            buttonText="Login with Google"
-            onSuccess={handleGoogleSuccess}
-            onFailure={handleGoogleFailure}
-            cookiePolicy={'single_host_origin'}
-            className="googleButton"
-          />
+          <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+            <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => console.error("Google Login Failed")} />
+          </GoogleOAuthProvider>
         </div>
       </div>
     </div>

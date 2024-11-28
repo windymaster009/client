@@ -4,26 +4,35 @@ import "./featuredProperties.css";
 const FeaturedProperties = () => {
   const { data, loading, error } = useFetch("/hotels?feature=true&limit=4");
 
+  // Check if data is an array, if not default to an empty array
+  const hotels = Array.isArray(data) ? data : [];
+
   return (
     <div className="fp">
       {loading ? (
-        "Loading"
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error loading featured properties</div>
+      ) : hotels.length === 0 ? (
+        <div>No featured properties available</div>
       ) : (
         <>
-          {data.map((item) => (
+          {hotels.map((item) => (
             <div className="fpItem" key={item._id}>
               <img
                 src={item.photos[0]}
-                alt=""
+                alt={`Image of ${item.name}`}
                 className="fpImg"
               />
               <span className="fpName">{item.name}</span>
               <span className="fpCity">{item.city}</span>
               <span className="fpPrice">Starting from ${item.cheapestPrice}</span>
-              {item.rating && <div className="fpRating">
-                <button>{item.rating}</button>
-                <span>Excellent</span>
-              </div>}
+              {item.rating && (
+                <div className="fpRating">
+                  <button>{item.rating}</button>
+                  <span>Excellent</span>
+                </div>
+              )}
             </div>
           ))}
         </>

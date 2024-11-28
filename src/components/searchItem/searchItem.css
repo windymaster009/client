@@ -107,3 +107,51 @@
   cursor: pointer;
   border-radius: 5px;
 }
+/* components/searchItem/searchItem.css */
+
+.searchItem {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.siImg {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.siDesc {
+  padding: 10px;
+}
+
+.siTitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.siDistance,
+.siTaxiOp,
+.siSubtitle,
+.siFeatures,
+.siCancelOp,
+.siPrice {
+  display: block;
+  margin: 5px 0;
+}
+
+.siCheckButton {
+  background-color: #008cba;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.siCheckButton:hover {
+  background-color: #005f7a;
+}

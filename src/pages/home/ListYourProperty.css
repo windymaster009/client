@@ -1,0 +1,198 @@
+/* Container styling */
+.list-property-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    background-image: linear-gradient(to bottom, #006CE4, #ffffff);
+    /* Similar to the blue background in the screenshot */
+    color: white;
+    height: 100vh;
+}
+
+.property-info {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-section {
+    max-width: 500px;
+}
+
+.header-section h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    color: #0071c2;
+    /* Blue highlight for "apartment" */
+}
+
+.header-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Right panel: Registration */
+.registration-panel {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    border-color: #ffc402;
+    border-style: solid;
+    border-width: 8px 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: black;
+  
+}
+
+.register-box h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.register-benefits {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.register-benefits li {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.register-button {
+    background-color: #0071c2;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.register-button:hover {
+    background-color: #005fa3;
+}
+
+.continue-registration {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.continue-registration a {
+    color: #0071c2;
+    text-decoration: none;
+}
+
+.continue-registration a:hover {
+    text-decoration: underline;
+}
+
+.peace-of-mind-section {
+    padding: 2rem;
+    background-color: #ffffff;
+    color: #333;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.peace-of-mind-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.benefits-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    width: 48%;
+    /* Adjust the width for two-column layout */
+}
+
+.checkmark {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: #0071c2;
+}
+
+.benefit-details h3 {
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: bold;
+}
+
+.benefit-details p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.benefit-details a {
+    color: #0071c2;
+    text-decoration: none;
+}
+
+.benefit-details a:hover {
+    text-decoration: underline;
+}
+
+
+.stand-out-section {
+    padding: 2rem;
+    background-color: #eeeeee;
+    color: #333;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.stand-out-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.benefits-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.benefit-item {
+    text-align: center;
+    width: 30%;
+    /* Adjusting for 3 items in a row */
+}
+
+.benefit-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1rem;
+}
+
+.benefit-details h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.benefit-details p {
+    font-size: 1rem;
+    color: #666;
+}

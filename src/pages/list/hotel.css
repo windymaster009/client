@@ -149,3 +149,119 @@
     color: lightgray;
     cursor: pointer;
   }
+  .error-message {
+    color: red; /* Change to your desired color */
+    font-weight: bold;
+    text-align: center; /* Center the error message */
+    margin: 20px 0; /* Add some spacing around the message */
+  }
+  .slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sliderWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .sliderImg {
+    max-width: 80%;
+    max-height: 80vh;
+    border-radius: 5px;
+  }
+  
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .arrow {
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+  }
+  .gallery {
+    display: flex;            /* Display images in a row */
+    flex-wrap: wrap;          /* Allow images to wrap to the next line */
+    gap: 10px;                /* Space between images */
+  }
+  
+  .galleryImage {
+    width: 200px;             /* Width of each image */
+    height: 150px;            /* Height of each image */
+    object-fit: cover;        /* Ensure images don't stretch and maintain aspect ratio */
+  }
+  .hotelPage {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar h3 {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 10px 0;
+    cursor: pointer;
+  }
+  
+  .sidebar ul li:hover {
+    background-color: #444;
+  }
+  
+  .hotelContainer {
+    margin-left: 220px; /* Make room for the sidebar */
+    padding: 20px;
+  }
+  
+  .hotelWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bookNow {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .bookNow:hover {
+    background-color: #444;
+  }
+  

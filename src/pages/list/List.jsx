@@ -7,11 +7,9 @@ import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
-import React from 'react';
-// import Navbar from '../../components/navbar/Navbar';
-// import Header from '../../components/header/Header';
-import MailList from '../../components/mailList/MailList'; // Adjust the import path as needed
-import './list.css';
+import MapComponent from "../../components/mapComponent/MapComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkerAlt, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
 const List = () => {
   const location = useLocation();
@@ -21,13 +19,18 @@ const List = () => {
   const [options, setOptions] = useState(location.state.options);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
+  const [selectedHotel, setSelectedHotel] = useState(null);
 
   const { data, loading, error, reFetch } = useFetch(
-    `/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
+    `/hotels?province=${destination}&min=${min || 0}&max=${max || 999}`
   );
 
   const handleClick = () => {
     reFetch();
+  };
+
+  const handleHotelSelect = (hotel) => {
+    setSelectedHotel(hotel);
   };
 
   return (
@@ -35,24 +38,31 @@ const List = () => {
       <Navbar />
       <Header type="list" />
       <div className="listContainer">
-        
         <div className="listWrapper">
           <div className="listSearch">
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
               <label>Destination</label>
-              <input
-                placeholder={destination}
-                type="text"
-                onChange={(e) => setDestination(e.target.value)}
-              />
+              <div className="lsInputWithIcon">
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="lsIcon" />
+                <input
+                  placeholder="Enter your destination"
+                  type="text"
+                  value={destination}
+                  onChange={(e) =>  (e.target.value)}
+                />
+              </div>
             </div>
             <div className="lsItem">
               <label>Check-in Date</label>
-              <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                dates[0].startDate,
-                "MM/dd/yyyy"
-              )} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}</span>
+              <div className="lsInputWithIcon" onClick={() => setOpenDate(!openDate)}>
+                <FontAwesomeIcon icon={faCalendarAlt} className="lsIcon" />
+                <span>
+                  {dates && dates[0]
+                    ? `${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}`
+                    : "Select dates"}
+                </span>
+              </div>
               {openDate && (
                 <DateRange
                   onChange={(item) => setDates([item.selection])}
@@ -61,83 +71,38 @@ const List = () => {
                 />
               )}
             </div>
-            <div className="lsItem">
-              <label>Options</label>
-              <div className="lsOptions">
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">
-                    Min price <small>per night</small>
-                  </span>
-                  <input
-                    type="number"
-                    onChange={(e) => setMin(e.target.value)}
-                    className="lsOptionInput"
-                  />
-                </div>
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">
-                    Max price <small>per night</small>
-                  </span>
-                  <input
-                    type="number"
-                    onChange={(e) => setMax(e.target.value)}
-                    className="lsOptionInput"
-                  />
-                </div>
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">Adult</span>
-                  <input
-                    type="number"
-                    min={1}
-                    className="lsOptionInput"
-                    placeholder={options.adult}
-                  />
-                </div>
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">Children</span>
-                  <input
-                    type="number"
-                    min={0}
-                    className="lsOptionInput"
-                    placeholder={options.children}
-                  />
-                </div>
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">Room</span>
-                  <input
-                    type="number"
-                    min={1}
-                    className="lsOptionInput"
-                    placeholder={options.room}
-                  />
-                </div>
-              </div>
-            </div>
             <button onClick={handleClick}>Search</button>
           </div>
           <div className="listResult">
             {loading ? (
-              "loading"
+              "Loading..."
+            ) : error ? (
+              <div>Error fetching data: {error.message}</div>
             ) : (
               <>
-                {data.length === 0 ? (
-                  <div className="error">
-                    <h2>No results found</h2>
-                    <p>We couldn't find any results for your search. Please try again with different criteria.</p>
-                  </div>
+                {Array.isArray(data?.data) && data.data.length > 0 ? (
+                  data.data.map((item) => (
+                    <div key={item._id} onClick={() => handleHotelSelect(item)}>
+                      <SearchItem item={item} />
+                    </div>
+                  ))
                 ) : (
-                  data.map((item) => <SearchItem item={item} key={item._id} />)
+                  <div>No hotels found.</div>
                 )}
               </>
-              
             )}
-         
           </div>
-        </div>      
+          {selectedHotel && selectedHotel.location && (
+            <MapComponent
+              location={{
+                latitude: selectedHotel.location.latitude,
+                longitude: selectedHotel.location.longitude,
+              }}
+            />
+          )}
+        </div>
       </div>
-      <MailList /> 
     </div>
-    
   );
 };
 

@@ -1,46 +1,78 @@
-.fp {
-  width: 100%;
-  max-width: 1024px;
+.featuredProperties {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 15px;
+  padding: 10px;
+  max-width: 100%;
 }
 
-.fpItem{
+.propertyItem {
   flex: 1;
-  gap: 10px;
-  display: flex;
-  flex-direction: column;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 240px; /* Restrict width for compact design */
 }
 
-.fpImg{
+.propertyItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.propertyImage {
   width: 100%;
-  height: 250px;
+  height: 150px; /* Reduced height for compact design */
   object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
-.fpName{
+.propertyInfo {
+  padding: 10px;
+  text-align: center;
+}
+
+.propertyName {
   color: #333;
+  font-size: 1rem;
   font-weight: bold;
+  margin: 4px 0;
 }
 
-.fpCity{
+.propertyProvince {
   font-weight: 300;
+  font-size: 0.9rem;
+  color: #666;
 }
 
-.fpPrice{
+.propertyPrice {
   font-weight: 500;
+  font-size: 0.9rem;
+  color: #007bff;
+  margin-top: 5px;
 }
 
-.fpRating>button{
-  background-color: #003580;
+.propertyRating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.propertyRating > button {
+  background-color: #007bff;
   color: white;
   border: none;
-  padding: 3px;
-  margin-right: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
   font-weight: bold;
+  font-size: 0.8rem;
+  margin-right: 5px;
 }
 
-.fpRating>span{
-  font-size: 14px;
+.propertyRating > span {
+  font-size: 0.8rem;
+  color: #333;
 }

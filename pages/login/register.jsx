@@ -24,18 +24,19 @@ const Register = () => {
   };
 
   const handleClick = async (e) => {
-    e.preventDefault();
-    if (credentials.password !== credentials.confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-    try {
-      await axios.post("/auth/register", credentials);
-      navigate("/login");
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  e.preventDefault();
+  if (credentials.password !== credentials.confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
+  try {
+    await axios.post("/auth/register", credentials);
+    navigate("/login");  // Redirect to login on successful registration
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 
   const handleGoogleSuccess = async (response) => {
     try {

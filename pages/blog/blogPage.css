@@ -1,0 +1,180 @@
+/* Container for the whole page */
+.blogPageContainer {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Hero Section */
+  .heroSection {
+    position: relative;
+    margin-bottom: 50px;
+  }
+  
+  .heroImage {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .heroContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+  }
+  
+  .heroTitle {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  .heroDescription {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .searchSection input {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .exploreButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Features Section */
+  .featuresSection {
+    display: flex;
+    justify-content: space-around;
+    margin: 50px 0;
+  }
+  
+  .featureCard {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .featureIcon {
+    color: #2b7a78;
+    margin-bottom: 10px;
+  }
+  
+  .featuresSection {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 0;
+  }
+  
+  /* Blog Posts Section */
+  .blogList {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+  
+  .blogPost {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    max-width: 300px;
+  }
+  
+  .blogPostImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .blogPostTitle {
+    font-size: 1.5rem;
+    margin: 15px 0;
+  }
+  
+  .blogPostDescription {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .readMoreButton {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  /* Recommended Section */
+  .recommendedSection {
+    margin: 50px 0;
+  }
+  
+  .recommendedGrid {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .recommendedItem {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+  }
+  .showMoreButton {
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block; /* Center the button */
+    font-size: 16px;
+  }
+  
+  .showMoreButton:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  .navigationButtons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .prevButton, .nextButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    font-size: 16px;
+  }
+  
+  .prevButton:disabled, .nextButton:disabled {
+    background-color: #cccccc; /* Gray for disabled state */
+    cursor: not-allowed;
+  }
+  
+  .prevButton:hover:not(:disabled), .nextButton:hover:not(:disabled) {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  

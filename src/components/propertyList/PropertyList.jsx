@@ -39,13 +39,17 @@
 // export default PropertyList;
 
 
+// PropertyList.js
+// PropertyList.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import "./propertyList.css";
 
 const PropertyList = () => {
-  const { data, loading, error } = useFetch("/hotels/countByType");
+  // Fix the URL: it should be relative, assuming you have a proxy set in package.json
+  const { data, loading, error } = useFetch("/hotels/countByType"); // Correct URL
+
   const navigate = useNavigate();
 
   const images = [
@@ -61,7 +65,9 @@ const PropertyList = () => {
   return (
     <div className="pList">
       {loading ? (
-        "loading"
+        "Loading..."
+      ) : error ? (
+        <div>Error loading data: {error.message}</div>
       ) : (
         <>
           {data &&
@@ -74,9 +80,7 @@ const PropertyList = () => {
                 <img src={img} alt="" className="pListImg" />
                 <div className="pListTitles">
                   <h1>{data[i]?.type}</h1>
-                  <h2>
-                    {data[i]?.count} {data[i]?.type}
-                  </h2>
+                  <h2>{data[i]?.count} {data[i]?.type}</h2>
                 </div>
               </div>
             ))}
@@ -87,4 +91,5 @@ const PropertyList = () => {
 };
 
 export default PropertyList;
+
 

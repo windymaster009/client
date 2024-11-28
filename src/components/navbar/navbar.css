@@ -7,7 +7,7 @@
   width: 100%;
   z-index: 1000;
   transition: background-color 0.3s ease-in-out; /* Smooth transition for background color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow */
+  box-shadow: 0 2px 4px rgba(219, 217, 217, 0.1); /* Optional: adds a shadow */
 }
 
 .navbar.scrolled {

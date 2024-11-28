@@ -1,0 +1,120 @@
+/* Wrapper for the main content and sidebar using Grid layout */
+.blogDetailWrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Main content takes 2/3, sidebar 1/3 */
+    gap: 40px; /* Space between content and sidebar */
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Blog content section styling */
+  .blogDetailContainer {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blogHeader {
+    position: relative;
+    margin-bottom: 30px;
+  }
+  
+  .blogImage {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blogTitleContainer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .blogTitle {
+    color: #fff;
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  
+  .blogDate {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  .blogContentContainer {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blogContent {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #444;
+  }
+  
+  /* Sidebar for related posts */
+  .blogSidebar {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .relatedTitle {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .relatedPosts {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .relatedPost {
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #007bff;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .relatedPost:hover {
+    color: #0056b3;
+  }
+  
+  /* MailList container styling */
+  .mailListContainer {
+    grid-column: span 2; /* Span across both columns of the grid */
+    margin-top: 40px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .blogDetailWrapper {
+      grid-template-columns: 1fr; /* Stack content and sidebar */
+    }
+  
+    .relatedTitle {
+      font-size: 1.3rem;
+    }
+  
+    .blogTitle {
+      font-size: 2rem;
+    }
+  
+    .blogContent {
+      font-size: 1rem;
+    }
+  }
+  
