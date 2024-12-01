@@ -19,6 +19,7 @@ import PropertyOwner from './pages/propertyowner/PropertyOwner';
 import HotelGallery from "./components/hotelGallery/HotelGallery";
 import ReservationHistory from './reservationHistory/ReservationHistory';
 import CityDetails from './components/featured/CityDetails'; 
+import Reserve from "./components/reserve/Reserve";
 function App() {
   const photos = [
     "https://via.placeholder.com/600x400",
@@ -50,6 +51,9 @@ function App() {
         <Route path="/gallery" element={<HotelGallery photos={photos} />} />
         <Route path="/reservations-history" element={<ReservationHistory />} />
         <Route path="/city/:cityName" element={<CityDetails />} /> 
+        <Route path="/hotels/:hotelId" element={<Hotel />} />
+        <Route path="/rooms/:hotelid" element={<Reserve />} />
+        
       </Routes>
     </BrowserRouter>
   );

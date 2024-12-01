@@ -1,87 +1,56 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-
 import "./reserve.css";
 import useFetch from "../../hooks/useFetch";
 import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Reserve = ({ setOpen, hotelId }) => {
-  const [selectedRooms, setSelectedRooms] = useState([]);
-  const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
+  const [selectedRoomType, setSelectedRoomType] = useState(null);
+  const { data, loading, error } = useFetch(`/rooms/${hotelId}`);
   const { dates } = useContext(SearchContext);
-
-  console.log("Fetched data:", data); // Debugging
-
-  const getDatesInRange = (startDate, endDate) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-
-    const date = new Date(start.getTime());
-
-    const dates = [];
-
-    while (date <= end) {
-      dates.push(new Date(date).getTime());
-      date.setDate(date.getDate() + 1);
-    }
-
-    return dates;
-  };
-
-  const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
-
-  const isAvailable = (roomNumber) => {
-    const isFound = roomNumber.unavailableDates.some((date) =>
-      alldates.includes(new Date(date).getTime())
-    );
-
-    return !isFound;
-  };
-
-  const handleSelect = (e) => {
-    const checked = e.target.checked;
-    const value = e.target.value;
-    setSelectedRooms(
-      checked
-        ? [...selectedRooms, value]
-        : selectedRooms.filter((item) => item !== value)
-    );
-  };
-
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleClick = async () => {
+  // Handle room type selection
+  const handleSelect = (roomType) => {
+    setSelectedRoomType((prev) => (prev === roomType ? null : roomType));
+  };
+
+  const handleReserveAll = async () => {
     try {
+      if (!selectedRoomType) return;
+
       const reservationData = {
-        user: currentUser._id, // Ensure you have the logged-in user's ID
+        user: user._id,
         hotel: hotelId,
-        room: selectedRooms, // The selected room IDs
-        checkInDate: dates[0].startDate, // Assuming you're using a date picker
+        roomType: selectedRoomType, // Reserve by room type
+        checkInDate: dates[0].startDate,
         checkOutDate: dates[0].endDate,
-        guests: 1, // This can be dynamic based on user input
+        guests: 2, // Update dynamically if required
       };
 
-      // Create the reservation by making a POST request to your API
-      await axios.post("/api/reservations", reservationData);
-
-      // Handle room availability updates
-      await Promise.all(
-        selectedRooms.map((roomId) => {
-          const res = axios.put(`/rooms/availability/${roomId}`, {
-            dates: alldates,
-          });
-          return res.data;
-        })
-      );
-      setOpen(false);
-      navigate("/");
+      await axios.post(`/api/reservations`, reservationData);
+      setOpen(false); // Close the reservation modal
+      navigate("/reservation-success");
     } catch (err) {
-      console.error(err);
+      console.error("Reservation failed:", err.message);
     }
   };
+
+  if (loading) return <div>Loading room data...</div>;
+  if (error) return <div>Error fetching room data: {error.message}</div>;
+
+  // Group rooms by title (type)
+  const groupedRooms = data?.data?.reduce((acc, room) => {
+    if (!acc[room.title]) {
+      acc[room.title] = room; // Use the first room object for type details
+    }
+    return acc;
+  }, {});
 
   return (
     <div className="reserve">
@@ -91,42 +60,33 @@ const Reserve = ({ setOpen, hotelId }) => {
           className="rClose"
           onClick={() => setOpen(false)}
         />
-        <span>Select your rooms:</span>
-        {loading ? (
-          <div>Loading...</div>
-        ) : error ? (
-          <div>Something went wrong. Please try again.</div>
-        ) : Array.isArray(data) ? (
-          data.map((item) => (
-            <div className="rItem" key={item._id}>
+        {groupedRooms && Object.values(groupedRooms).length > 0 ? (
+          Object.values(groupedRooms).map((room) => (
+            <div key={room._id} className="rItem">
               <div className="rItemInfo">
-                <div className="rTitle">{item.title}</div>
-                <div className="rDesc">{item.desc}</div>
-                <div className="rMax">
-                  Max people: <b>{item.maxPeople}</b>
-                </div>
-                <div className="rPrice">{item.price}</div>
-              </div>
-              <div className="rSelectRooms">
-                {item.roomNumbers.map((roomNumber) => (
-                  <div className="room" key={roomNumber._id}>
-                    <label>{roomNumber.number}</label>
-                    <input
-                      type="checkbox"
-                      value={roomNumber._id}
-                      onChange={handleSelect}
-                      disabled={!isAvailable(roomNumber)}
-                    />
-                  </div>
-                ))}
+                <span className="rTitle">{room.title}</span>
+                <span className="rDesc">{room.desc}</span>
+                <span className="rMax">Max people: {room.maxPeople}</span>
+                <span className="rPrice">${room.price}</span>
+                {/* Button to reserve/unreserve */}
+                <button
+                  className="rButton"
+                  onClick={() => handleSelect(room.title)}
+                >
+                  {selectedRoomType === room.title ? "Unreserve" : "Reserve"}
+                </button>
               </div>
             </div>
           ))
         ) : (
-          <div>No rooms available or invalid response.</div>
+          <div>No rooms available for this hotel.</div>
         )}
-        <button onClick={handleClick} className="rButton">
-          Reserve Now!
+        <button
+          className="rButton"
+          onClick={handleReserveAll}
+          disabled={!selectedRoomType}
+        >
+          Confirm Reservation
         </button>
       </div>
     </div>
