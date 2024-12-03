@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
-import MapComponent from "../../components/mapComponent/MapComponent";
+// import MapComponent from "../../components/mapComponent/MapComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -92,14 +92,14 @@ const List = () => {
               </>
             )}
           </div>
-          {selectedHotel && selectedHotel.location && (
+          {/* {selectedHotel && selectedHotel.location && (
             <MapComponent
               location={{
                 latitude: selectedHotel.location.latitude,
                 longitude: selectedHotel.location.longitude,
               }}
             />
-          )}
+          )} */}
         </div>
       </div>
     </div>

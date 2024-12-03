@@ -4,6 +4,8 @@
   align-items: center; /* Center align content */
   height: 100vh;
   background-color: #f9f9f9; /* Light background for better contrast */
+  padding-top: 60px; /* Add padding to account for the Navbar's height */
+  box-sizing: border-box; /* Ensure padding is included in height calculation */
 }
 
 .form-wrapper {
@@ -13,7 +15,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   border-radius: 8px; /* Rounded corners for a softer look */
   text-align: center;
+  margin-top: 1rem; /* Add margin to further separate it from the Navbar */
 }
+
 
 h1 {
   font-size: 1.75rem; /* Increased font size for prominence */

@@ -60,7 +60,7 @@ const Hotel = () => {
               <span>{data.location?.address}</span>
             </div>
             <span className="hotelDistance">
-              Excellent location – {data.distance}m from center
+              Excellent location – {data.distance}m from center you can click on here to see the map
             </span>
             <span className="hotelPriceHighlight">
               Book a stay over ${data.cheapestPrice} at this property and get a free airport taxi

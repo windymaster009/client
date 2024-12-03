@@ -56,7 +56,7 @@ const Navbar = () => {
                     <Link to="/perdetail" className="dropdown-item">
                       Profile
                     </Link>
-                    <Link to="/booking" className="dropdown-item">
+                    <Link to="/reservations-history" className="dropdown-item">
                       Booking
                     </Link>
                     <button className="dropdown-item" onClick={handleSignOut}>

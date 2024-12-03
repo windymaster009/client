@@ -1,16 +1,29 @@
-.homeContainer{
-  margin-top: 50px;
+body {
+  margin: 0; /* Remove default browser margin */
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.homeContainer {
+  margin: 50px auto 0; /* Center the container horizontally */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  max-width: 1024px; /* Limit the width for proper alignment */
+  width: 100%; /* Ensure responsiveness */
+  padding: 0 15px; /* Add padding for mobile devices */
 }
 
-.homeTitle{
-  width: 1024px;
-  font-size: 20px;
-  font-weight: bold;
+.homeTitle {
   font-size: 25px;
-  margin-bottom: 10px; /* added margin-bottom to create space between h1 and p */
+  font-weight: bold;
+  margin-bottom: 10px; /* Space between the heading and description */
+  text-align: center; /* Center text inside the container */
 }
 
+.homeDesc {
+  text-align: center; /* Center descriptions under titles */
+  color: #555; /* Optional: Improve description text color */
+}

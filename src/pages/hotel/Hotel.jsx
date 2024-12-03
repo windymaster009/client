@@ -1,60 +1,50 @@
-import "./hotel.css";
+import "../hotel/hotel.css";
 import Navbar from "../../components/navbar/Navbar";
-import Header from "../../components/header/Header";
+import Header from "../../components/header/Headerbar";
 import MailList from "../../components/mailList/MailList";
-import Footer from "../../components/footer/Footer";
+import Reserve from "../../components/reserve/Reserve";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircleArrowLeft,
-  faCircleArrowRight,
-  faCircleXmark,
+  // faCircleArrowLeft,
+  // faCircleArrowRight,
+  // faCircleXmark,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useState } from "react";
+import { useContext, useState, useCallback, useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
-import Reserve from "../../components/reserve/Reserve";
 
 const Hotel = () => {
   const location = useLocation();
-  const id = location.pathname.split("/")[2];
+  const id = location.pathname.split("/")[2]; // Extract hotel ID from URL
+  const { data, loading, error } = useFetch(`http://localhost:8800/api/hotels/${id}`);
+  const { dates } = useContext(SearchContext);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  // Updated fetch URL to match new backend route
-  const { data, loading, error } = useFetch(`http://localhost:8800/api/hotels/${id}`);
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const { dates, options } = useContext(SearchContext);
-
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-  function dayDifference(date1, date2) {
-    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
-    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-    return diffDays;
-  }
+  const dayDifference = (date1, date2) =>
+    Math.ceil(Math.abs(date2.getTime() - date1.getTime()) / MILLISECONDS_PER_DAY);
 
   const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
-  const handleOpen = (i) => {
-    setSlideNumber(i);
+  const handleOpen = (index) => {
+    setSlideNumber(index);
     setOpen(true);
   };
 
   const handleMove = (direction) => {
-    let newSlideNumber;
-    const totalImages = data.photos?.length || 0; // Ensure photos are defined
-
-    if (direction === "l") {
-      newSlideNumber = slideNumber === 0 ? totalImages - 1 : slideNumber - 1;
-    } else {
-      newSlideNumber = slideNumber === totalImages - 1 ? 0 : slideNumber + 1;
-    }
-
+    const totalImages = data.photos?.length || 0;
+    const newSlideNumber =
+      direction === "l"
+        ? (slideNumber - 1 + totalImages) % totalImages
+        : (slideNumber + 1) % totalImages;
     setSlideNumber(newSlideNumber);
   };
 
@@ -66,96 +56,70 @@ const Hotel = () => {
     }
   };
 
-  // Loading and error states
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (!open) return;
+      if (e.key === "ArrowLeft") handleMove("l");
+      if (e.key === "ArrowRight") handleMove("r");
+    },
+    [open, handleMove]
+  );
+
+  useEffect(() => {
+    if (open) {
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [open, handleKeyDown]);
+
   if (loading) return <div>Loading...</div>;
-
-  if (error) return <div>Error loading hotel data: {error}</div>;
-
-  // Ensure that data and location are defined before rendering
-  const locationAddress = data.location?.address || "Address not available"; // Fallback if location is undefined
+  if (error) return <div>Error loading hotel data: {error.message}</div>;
 
   return (
     <div>
       <Navbar />
       <Header type="list" />
       <div className="hotelContainer">
-        {open && (
-          <div className="slider">
-            <FontAwesomeIcon
-              icon={faCircleXmark}
-              className="close"
-              onClick={() => setOpen(false)}
-            />
-            <FontAwesomeIcon
-              icon={faCircleArrowLeft}
-              className="arrow"
-              onClick={() => handleMove("l")}
-            />
-            <div className="sliderWrapper">
-              <img
-                src={data.photos ? data.photos[slideNumber] : ""}
-                alt=""
-                className="sliderImg"
-              />
-            </div>
-            <FontAwesomeIcon
-              icon={faCircleArrowRight}
-              className="arrow"
-              onClick={() => handleMove("r")}
-            />
-          </div>
-        )}
         <div className="hotelWrapper">
-          {/* First Button */}
-          <button className="bookNow">View Room</button>
+          <button className="bookNow" onClick={handleClick}>
+            View Room
+          </button>
           <h1 className="hotelTitle">{data.name}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span>{locationAddress}</span> {/* Safely access address */}
+            <span>{data.location?.address || "Address not available"}</span>
           </div>
           <span className="hotelDistance">
             Excellent location – {data.distance}m from center
           </span>
           <span className="hotelPriceHighlight">
-            Book a stay over ${data.cheapestPrice} at this property and get a
-            free airport taxi
+            Book a stay over ${data.cheapestPrice} at this property to get more information.
           </span>
           <div className="hotelImages">
             {data.photos?.map((photo, i) => (
-              <div className="hotelImgWrapper" key={i}>
-                <img
-                  onClick={() => handleOpen(i)}
-                  src={photo}
-                  alt=""
-                  className="hotelImg"
-                />
+              <div
+                key={i}
+                className={`hotelImgWrapper ${i === slideNumber ? "active" : ""}`}
+                onClick={() => handleOpen(i)}
+              >
+                <img src={photo} alt={`Thumbnail ${i + 1}`} className="hotelImg" />
               </div>
             ))}
           </div>
           <div className="hotelDetails">
             <div className="hotelDetailsTexts">
-              <h1 className="hotelTitle">{data.title}</h1>
-              <p className="hotelDesc">{data.desc}</p>
+              <h2 className="hotelDesc">{data.description}</h2>
             </div>
             <div className="hotelDetailsPrice">
               <h1>Perfect for a {days}-night stay!</h1>
-              <span>
-                Located in the real heart of {data.city}, this property has an
-                excellent location score of 9.8!
-              </span>
-              <h2>
-                <b>${days * data.cheapestPrice * options.room}</b> ({days}{" "}
-                nights)
-              </h2>
-              {/* Second Button */}
-              <button onClick={handleClick}>View Room</button>
+              <h2>${data.cheapestPrice * days}</h2>
+              <button onClick={handleClick}>Reserve Now</button>
             </div>
           </div>
         </div>
-        <MailList />
-        <Footer />
       </div>
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
+      <MailList />
+      {openModal && <Reserve setOpenModal={setOpenModal} hotelId={id} />}
     </div>
   );
 };

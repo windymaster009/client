@@ -5,6 +5,9 @@ import { FaUserCircle, FaLock, FaUserFriends, FaCreditCard, FaEnvelope, FaClipbo
 import Navbar from "../../components/navbar/Navbar";
 import "./per-detail.css";
 
+
+
+
 const User = () => {
   const { user, dispatch } = useContext(AuthContext);
   const [view, setView] = useState("personalDetails");
@@ -25,6 +28,7 @@ const User = () => {
   const [nationalIdPreview, setNationalIdPreview] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [wishlist, setWishlist] = useState([]);
+  const accessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
     if (user) {
@@ -72,11 +76,30 @@ const User = () => {
     });
   };
 
-  const handlePasswordChange = async (e) => {
-    e.preventDefault();
-    // Implement your password change logic here
-    alert("Password changed successfully!");
+  
+  const handlePasswordChange = async (userId, newPassword) => {
+    try {
+      const response = await fetch(`http://localhost:8800/api/users/update/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`, // Ensure accessToken is defined
+        },
+        body: JSON.stringify({ password: newPassword }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert('Password updated successfully');
+      } else {
+        console.error('Error updating password:', data.message);
+      }
+    } catch (error) {
+      console.error('Request failed:', error);
+    }
   };
+  
+
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -188,80 +211,43 @@ const User = () => {
       case "security":
         return (
           <div className="userContent">
-          <div className="userContentHeader">
-            <FaLock className="userContentIcon" />
-            <h3>Security</h3>
-          </div>
-          <p>Manage your security settings and protect your account.</p>
-
-          {/* Change Password Section */}
-          <div className="security-section">
-            <h4>Change Password</h4>
-            <form className="passwordForm" onSubmit={handlePasswordChange}>
-              <label>Old Password</label>
-              <input
-                type="password"
-                name="oldPassword"
-                value={passwordInfo.oldPassword}
-                onChange={handlePasswordChangeInput}
-                className="userInput longInput"
-                placeholder="Old Password"
-              />
-              <label>New Password</label>
-              <input
-                type="password"
-                name="newPassword"
-                value={passwordInfo.newPassword}
-                onChange={handlePasswordChangeInput}
-                className="userInput longInput"
-                placeholder="New Password"
-              />
-              <button type="submit" className="userButton">Change Password</button>
-            </form>
-          </div>
-
-          {/* Two-factor Authentication Section */}
-          {/* <div className="security-section">
-            <h4>Two-factor Authentication</h4>
-            <button className="userButton">Set Up 2FA</button>
-          </div> */}
-
-          {/* Active Sessions Section */}
-          {/* <div className="security-section">
-            <h4>Active Sessions</h4>
-            <button className="userButton">Sign Out of All Sessions</button>
-          </div> */}
-
-          {/* Delete Account Section */}
-          {/* <div className="security-section">
-            <h4>Delete Account</h4>
-            <button className="deleteButton">Delete Account</button>
-          </div> */}
-
-          {/* Verify (National ID) Section */}
-          {/* <div className="security-section">
-            <h4>Verify (National ID)</h4>
-            <input type="file" className="userInput" onChange={handleFileChange} />
-            {nationalIdPreview && (
-              <div className="image-preview">
-                <img src={nationalIdPreview} alt="National ID Preview" />
-                <button className="userButton" onClick={handleVerify}>Confirm</button>
-              </div>
-            )}
-          </div> */}
-        </div>
-        );
-      case "otherTravellers":
-        return (
-          <div className="userContent">
             <div className="userContentHeader">
-              <FaUserFriends className="userContentIcon" />
-              <h3>Other travellers</h3>
+              <FaLock className="userContentIcon" />
+              <h3>Security</h3>
             </div>
-            <p>Add or edit information about the people you're travelling with.</p>
-            <button className="userButton">Manage travellers</button>
+            <p>Manage your security settings and protect your account.</p>
+
+            <div className="security-section">
+              <h4>Change Password</h4>
+              <form className="passwordForm" onSubmit={handlePasswordChange}>
+                <label>New Password</label>
+                <input
+                  type="password"
+                  name="currentPassword"
+                  value={userInfo.currentPassword}
+                  onChange={handleChange}
+                  className="userInput longInput"
+                  placeholder="Enter your new password"
+                />
+                <button type="submit" className="userButton">
+                  Change Password
+                </button>
+              </form>
+            </div>
           </div>
         );
+
+      // case "otherTravellers":
+      //   return (
+      //     <div className="userContent">
+      //       <div className="userContentHeader">
+      //         <FaUserFriends className="userContentIcon" />
+      //         <h3>Other travellers</h3>
+      //       </div>
+      //       <p>Add or edit information about the people you're travelling with.</p>
+      //       <button className="userButton">Manage travellers</button>
+      //     </div>
+      //   );
       case "paymentDetails":
         return (
           <div className="userContent">
@@ -348,21 +334,21 @@ const User = () => {
             <button className="userButton" onClick={() => setView("security")}>
               Security
             </button>
-            <button className="userButton" onClick={() => setView("otherTravellers")}>
+            {/* <button className="userButton" onClick={() => setView("otherTravellers")}>
               Other travellers
-            </button>
-            <button className="userButton" onClick={() => setView("paymentDetails")}>
+            </button> */}
+            {/* <button className="userButton" onClick={() => setView("paymentDetails")}>
               Payment details
-            </button>
-            <button className="userButton" onClick={() => setView("emailNotifications")}>
+            </button> */}
+            {/* <button className="userButton" onClick={() => setView("emailNotifications")}>
               Email notifications
-            </button>
-            <button className="userButton" onClick={() => setView("booking")}>
+            </button> */}
+            {/* <button className="userButton" onClick={() => setView("booking")}>
               Bookings
-            </button>
-            <button className="userButton" onClick={() => setView("wishlist")}>
+            </button> */}
+            {/* <button className="userButton" onClick={() => setView("wishlist")}>
               Wishlist
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="userRight">{renderContent()}</div>
