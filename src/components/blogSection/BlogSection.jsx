@@ -2,6 +2,7 @@
 import React from 'react';
 import './blogSection.css';
 
+
 // Sample blog post data
 const blogPosts = [
   {
@@ -26,21 +27,25 @@ const blogPosts = [
 
 const BlogSection = ({ onViewAllBlogs }) => {
   return (
-    <div className="blogSection">
-      <h1 className="blogTitle">Latest Blogs</h1>
-      <div className="blogList">
-        {blogPosts.map((post) => (
-          <div key={post.id} className="blogPost">
-            <img src={post.image} alt={post.title} className="blogImage" />
-            <h2 className="blogPostTitle">{post.title}</h2>
-            <p className="blogPostExcerpt">{post.excerpt}</p>
-          </div>
-        ))}
-      </div>
-      <div className="buttonContainer">
-        <button className="blogButton" onClick={onViewAllBlogs}>
-          View All Blogs
-        </button>
+    <div>
+    
+      <div className="blogSection">
+
+        <h1 className="blogTitle">Latest Blogs</h1>
+        <div className="blogList">
+          {blogPosts.map((post) => (
+            <div key={post.id} className="blogPost">
+              <img src={post.image} alt={post.title} className="blogImage" />
+              <h2 className="blogPostTitle">{post.title}</h2>
+              <p className="blogPostExcerpt">{post.excerpt}</p>
+            </div>
+          ))}
+        </div>
+        <div className="buttonContainer">
+          <button className="blogButton" onClick={onViewAllBlogs}>
+            View All Blogs
+          </button>
+        </div>
       </div>
     </div>
   );

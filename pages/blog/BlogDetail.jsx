@@ -12,7 +12,8 @@ const BlogDetail = () => {
     const fetchBlogDetail = async () => {
       try {
         const response = await axios.get(`http://localhost:8800/api/blogs/${id}`); // Fetch blog by ID
-        setBlog(response.data);
+        console.log("Fetched Blog Detail:", response.data); // Debugging log
+        setBlog(response.data); // Set the fetched blog data
       } catch (error) {
         console.error("Error fetching blog detail", error);
       }
@@ -21,7 +22,10 @@ const BlogDetail = () => {
     fetchBlogDetail();
   }, [id]);
 
-  if (!blog) return <div>Loading...</div>;
+  if (!blog) return <div>Loading...</div>; // Display loading state
+
+  // gallery is already an array, so we can use it directly
+  const galleryImages = Array.isArray(blog.gallery) ? blog.gallery : [];
 
   return (
     <div className="blogDetailWrapper">
@@ -31,7 +35,9 @@ const BlogDetail = () => {
           <img src={blog.thumbnail} alt={blog.name} className="blogImage" />
           <div className="blogTitleContainer">
             <h1 className="blogTitle">{blog.name}</h1>
-            <p className="blogDate">Published on October 8, 2024</p>
+            <p className="blogDate">
+              Published on {new Date(blog.createdAt).toLocaleDateString()}
+            </p>
           </div>
         </div>
 
@@ -39,8 +45,26 @@ const BlogDetail = () => {
         <div className="blogContentContainer">
           <p className="blogContent">{blog.description}</p>
         </div>
+
+        {/* Blog Gallery */}
+        {galleryImages.length > 0 && (
+          <div className="blogGalleryContainer">
+            <h2 className="galleryTitle">Gallery</h2>
+            <div className="galleryImages">
+              {galleryImages.map((imageUrl, index) => (
+                <img
+                  key={index}
+                  src={imageUrl}
+                  alt={`Gallery Image ${index + 1}`}
+                  className="galleryImage"
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
+      {/* Mail List */}
       <div className="mailListContainer">
         <MailList />
       </div>

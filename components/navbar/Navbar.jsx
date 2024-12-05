@@ -151,12 +151,12 @@ const Navbar = () => {
             <FiUser className="icon" />
             {showDropdown && (
               <div className="dropdown-menu">
-                <Link to="/user" className="dropdown-item">
+                {/* <Link to="/user" className="dropdown-item">
                   Profile
                 </Link>
                 <Link to="/booking" className="dropdown-item">
                   Booking
-                </Link>
+                </Link> */}
                 <button className="dropdown-item" onClick={handleSignOut}>
                   Sign Out
                 </button>

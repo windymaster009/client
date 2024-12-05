@@ -39,7 +39,7 @@ const Register = () => {
 
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      const res = await axios.post("/auth/google/register", { token: credentialResponse.credential });
+      const res = await axios.post("/social/google", { token: credentialResponse.credential });
       console.log("Google Registration Success:", res.data);
       navigate("/login");
     } catch (err) {
@@ -62,11 +62,11 @@ const Register = () => {
           <button onClick={() => navigate("/login")} className="rButton backButton">Back to Login</button>
         </div>
         {error && <span className="rError">{error.message}</span>}
-        <div className="googleRegister">
-          <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+        {/* <div className="googleRegister">
+          <GoogleOAuthProvider clientId="1024106569318-5hlbu74tfugfq5n3sm4ihai22vtjr16o.apps.googleusercontent.com">
             <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => console.error("Google Registration Failed")} />
           </GoogleOAuthProvider>
-        </div>
+        </div> */}
       </div>
     </div>
   );

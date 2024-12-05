@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Featured = () => {
   // Fetch hotel count for different cities
   const { data, loading, error } = useFetch(
-    "/hotels/countByCity?cities=phnompenh,siemreap,takeo,kohkong,Kampot"
+    "/hotels/countByProvince?provinces=phnompenh,Kondal,takeo,Kampot"
   );
 
   // Handle error fetching data
@@ -15,10 +15,10 @@ const Featured = () => {
 
   const cities = [
     { name: "Phnom Penh", image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/529234280.jpg?k=474b11a0f19ada6f117015ef94165bccb6d43ff35a9ca61fd0714f07156b9129&o=&hp=1" },
-    { name: "Siem Reap", image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/529234280.jpg?k=474b11a0f19ada6f117015ef94165bccb6d43ff35a9ca61fd0714f07156b9129&o=&hp=1" },
+    { name: "Kondal", image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/529234280.jpg?k=474b11a0f19ada6f117015ef94165bccb6d43ff35a9ca61fd0714f07156b9129&o=&hp=1" },
     { name: "takeo", image: "https://i0.wp.com/www.cambodialifestyle.com/wp-content/uploads/2024/04/Takeo-4.jpg?fit=1000%2C612&ssl=1" },
-    { name: "Koh Kong", image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/529234280.jpg?k=474b11a0f19ada6f117015ef94165bccb6d43ff35a9ca61fd0714f07156b9129&o=&hp=1" },
-    { name: "Kampot", image: "https://news.worldcasinodirectory.com/wp-content/uploads/2021/06/56541306-61706_F3529694617099241_5896354478549320831_N7.jpg" },
+    { name: "Kampot", image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/529234280.jpg?k=474b11a0f19ada6f117015ef94165bccb6d43ff35a9ca61fd0714f07156b9129&o=&hp=1" },
+    { name: "SeimReap", image: "https://news.worldcasinodirectory.com/wp-content/uploads/2021/06/56541306-61706_F3529694617099241_5896354478549320831_N7.jpg" },
   ];
 
   return (

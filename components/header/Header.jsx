@@ -63,7 +63,7 @@ const Header = ({ type }) => {
       flag: "https://cdn-icons-png.flaticon.com/512/6735/6735694.png",
     },
     {
-      title: "Bangkok",
+      title: "Takeo",
       img: "https://www.lamabooking.com/images/destinations/bangkok.jpg",
       flag: "https://cdn-icons-png.flaticon.com/512/6735/6735694.png",
     },
@@ -111,7 +111,7 @@ const Header = ({ type }) => {
               more with a free Lamabooking account
             </p>
             {!user && (
-              <button className="headerBtn">Pleasse login for booking</button>
+              <button className="headerBtn">Please login for booking</button>
             )}
             <div className="headerSearch">
               <div className="headerSearchItem">
@@ -127,18 +127,24 @@ const Header = ({ type }) => {
                 {showDropdown && (
                   <div className="dropdown">
                     <ul>
-                      {destinations.map((destination) => (
-                        <li
-                          key={destination.title}
-                          onClick={() => {
-                            setDestination(destination.title);
-                            setShowDropdown(false);
-                          }}
-                        >
-                          <img src={destination.flag} alt="Flag" />
-                          {destination.title}
-                        </li>
-                      ))}
+                      {destinations
+                        .filter((dest) =>
+                          dest.title
+                            .toLowerCase()
+                            .includes(destination.toLowerCase())
+                        )
+                        .map((filteredDest) => (
+                          <li
+                            key={filteredDest.title}
+                            onClick={() => {
+                              setDestination(filteredDest.title);
+                              setShowDropdown(false);
+                            }}
+                          >
+                            <img src={filteredDest.flag} alt="Flag" />
+                            {filteredDest.title}
+                          </li>
+                        ))}
                     </ul>
                   </div>
                 )}

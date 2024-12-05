@@ -9,32 +9,37 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Reserve = ({ setOpen, hotelId }) => {
-  const [selectedRoomType, setSelectedRoomType] = useState(null);
+  const [selectedRoomId, setSelectedRoomId] = useState("");
   const { data, loading, error } = useFetch(`/rooms/${hotelId}`);
   const { dates } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Handle room type selection
-  const handleSelect = (roomType) => {
-    setSelectedRoomType((prev) => (prev === roomType ? null : roomType));
+  // Handle room selection
+  const handleSelect = (roomId) => {
+    setSelectedRoomId(roomId === selectedRoomId ? "" : roomId);
   };
 
-  const handleReserveAll = async () => {
+  // Reserve selected room
+  const handleReserve = async () => {
     try {
-      if (!selectedRoomType) return;
+      if (!selectedRoomId) return;
 
       const reservationData = {
         user: user._id,
-        hotel: hotelId,
-        roomType: selectedRoomType, // Reserve by room type
-        checkInDate: dates[0].startDate,
-        checkOutDate: dates[0].endDate,
-        guests: 2, // Update dynamically if required
+        roomId: selectedRoomId,
+        checkInDate: dates[0]?.startDate,
+        checkOutDate: dates[0]?.endDate,
+        guests: 2, // Adjust as needed
       };
 
-      await axios.post(`/api/reservations`, reservationData);
-      setOpen(false); // Close the reservation modal
+      // API call with hotelId as a route parameter
+      await axios.post(
+        `http://localhost:8800/api/reservations/${hotelId}`,
+        reservationData
+      );
+
+      setOpen(false); // Close modal
       navigate("/reservation-success");
     } catch (err) {
       console.error("Reservation failed:", err.message);
@@ -44,50 +49,47 @@ const Reserve = ({ setOpen, hotelId }) => {
   if (loading) return <div>Loading room data...</div>;
   if (error) return <div>Error fetching room data: {error.message}</div>;
 
-  // Group rooms by title (type)
-  const groupedRooms = data?.data?.reduce((acc, room) => {
-    if (!acc[room.title]) {
-      acc[room.title] = room; // Use the first room object for type details
-    }
-    return acc;
-  }, {});
-
   return (
     <div className="reserve">
       <div className="rContainer">
+        {/* Close Button */}
         <FontAwesomeIcon
           icon={faCircleXmark}
           className="rClose"
           onClick={() => setOpen(false)}
         />
-        {groupedRooms && Object.values(groupedRooms).length > 0 ? (
-          Object.values(groupedRooms).map((room) => (
+
+        {/* Title */}
+        <h1 className="rTitle">Available Rooms</h1>
+
+        {/* Room List */}
+        {data?.data?.length > 0 ? (
+          data.data.map((room) => (
             <div key={room._id} className="rItem">
               <div className="rItemInfo">
                 <span className="rTitle">{room.title}</span>
                 <span className="rDesc">{room.desc}</span>
                 <span className="rMax">Max people: {room.maxPeople}</span>
                 <span className="rPrice">${room.price}</span>
-                {/* Button to reserve/unreserve */}
-                <button
-                  className="rButton"
-                  onClick={() => handleSelect(room.title)}
-                >
-                  {selectedRoomType === room.title ? "Unreserve" : "Reserve"}
-                </button>
               </div>
+              <button
+                className={`rButton ${selectedRoomId === room._id ? "selected" : ""}`}
+                onClick={() => handleSelect(room._id)}
+              >
+                {selectedRoomId === room._id ? "Selected" : "Reserve"}
+              </button>
             </div>
           ))
         ) : (
           <div>No rooms available for this hotel.</div>
         )}
-        <button
-          className="rButton"
-          onClick={handleReserveAll}
-          disabled={!selectedRoomType}
-        >
-          Confirm Reservation
-        </button>
+
+        {/* Confirm Button */}
+        {selectedRoomId && (
+          <button className="rConfirmButton" onClick={handleReserve}>
+            Confirm Reservation
+          </button>
+        )}
       </div>
     </div>
   );

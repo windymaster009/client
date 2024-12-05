@@ -1,0 +1,182 @@
+.header {
+    background-image: linear-gradient(to bottom, #006CE4, #ffffff);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 60vh;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  .headerContainer {
+    width: 100%;
+    max-width: 1024px;
+    margin: 20px 0px;
+    text-align: center;
+  }
+  
+  .headerContainer.listMode {
+    margin: 20px 0px 0px 0px;
+  }
+  
+  .headerTitle {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px #000;
+  }
+  
+  .headerDesc {
+    font-size: 1.2rem;
+    margin: 15px 0px;
+    line-height: 1.5;
+  }
+  
+  .headerBtn {
+    background-color: transparent;
+    color: #ffffff;
+    font-weight: 600;
+    background-color: #006CE4;
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .headerBtn:hover {
+    background-color: #f7b85a;
+    color: #003580;
+  }
+  .headerSearch {
+    height: 45px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 15px;
+    position: absolute;
+    bottom: -35px;
+    width: 100%;
+    max-width: 1024px;
+    z-index: 99;
+    border: 5px solid #FFB700;
+  }
+  
+  .headerIcon {
+    color: #000000;
+    font-size: 1.5rem;
+  }
+  
+  .headerSearchItem {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .headerSearchInput {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    color: #000000;
+    background-color: transparent;
+    border-bottom: 2px solid #000000;
+  }
+  
+  .headerSearchText {
+    color: #000000;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .date {
+    position: absolute;
+    top: 70px;
+    z-index: 2;
+    width: 300px;
+  }
+  
+  .options {
+    z-index: 2;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background-color: #fff;
+    color: gray;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+  }
+  
+  .optionItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .optionCounter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    color: #003580;
+  }
+  
+  .optionCounterButton {
+    width: 35px;
+    height: 35px;
+    border: none;
+    color: #003580;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 50%;
+    font-size: 1.2rem;
+  }
+  
+  .optionCounterButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #006CE4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 100;
+  }
+  
+  .dropdown ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .dropdown li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color #003580;
+    display: flex;
+    align-items: center;
+  }
+  
+  .dropdown li:hover {
+    background-color: #003580;
+  }
+  
+  .dropdown img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }

@@ -42,7 +42,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/perdetail" element={<Predetail />} />
         <Route path="/properties/:type" element={<PropertyListByType />} />
-        <Route path="/reservation-success" element={<ReservationSuccess />} />
+        <Route path="/reservations/:hotelId" element={<ReservationSuccess />} />
         <Route path="/list-your-property" element={<PropertyList />} /> {/* Corrected route */}
         <Route path="/blogs" element={<BlogPage />} />
         <Route path="/blogs/:id" element={<BlogDetail />} />
@@ -52,7 +52,7 @@ function App() {
         <Route path="/reservations-history" element={<ReservationHistory />} />
         <Route path="/city/:cityName" element={<CityDetails />} /> 
         <Route path="/hotels/:hotelId" element={<Hotel />} />
-        <Route path="/rooms/:hotelid" element={<Reserve />} />
+        <Route path="/history/:userId/:hotelId" element={<ReservationHistory />} />
         
       </Routes>
     </BrowserRouter>

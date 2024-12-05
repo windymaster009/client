@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
-import MapComponent from "../../components/mapComponent/MapComponent";
+// import MapComponent from "../../components/mapComponent/MapComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -39,7 +39,7 @@ const List = () => {
       <Header type="list" />
       <div className="listContainer">
         <div className="listWrapper">
-          <div className="listSearch">
+          {/* <div className="listSearch">
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
               <label>Destination</label>
@@ -72,7 +72,7 @@ const List = () => {
               )}
             </div>
             <button onClick={handleClick}>Search</button>
-          </div>
+          </div> */}
           <div className="listResult">
             {loading ? (
               "Loading..."
@@ -92,14 +92,14 @@ const List = () => {
               </>
             )}
           </div>
-          {selectedHotel && selectedHotel.location && (
+          {/* {selectedHotel && selectedHotel.location && (
             <MapComponent
               location={{
                 latitude: selectedHotel.location.latitude,
                 longitude: selectedHotel.location.longitude,
               }}
             />
-          )}
+          )} */}
         </div>
       </div>
     </div>

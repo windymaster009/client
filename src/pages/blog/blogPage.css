@@ -17,6 +17,8 @@
     height: 400px;
     object-fit: cover;
     border-radius: 10px;
+    filter: brightness(0.5);
+
   }
   
   .heroContent {
@@ -110,13 +112,20 @@
   }
   
   .readMoreButton {
-    padding: 10px;
     background-color: #007bff;
     color: white;
     border: none;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    font-size: 16px;
+    text-decoration: none; /* Removes the underline */
+    margin-top: 15px; /* Moves the button down */
+    display: inline-block; /* Ensures proper positioning */
+  }
+  
+  .readMoreButton:hover {
+    background-color: #0018b3;
   }
   
   /* Recommended Section */

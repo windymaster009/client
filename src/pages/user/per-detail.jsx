@@ -188,58 +188,58 @@ const User = () => {
       case "security":
         return (
           <div className="userContent">
-          <div className="userContentHeader">
-            <FaLock className="userContentIcon" />
-            <h3>Security</h3>
-          </div>
-          <p>Manage your security settings and protect your account.</p>
+            <div className="userContentHeader">
+              <FaLock className="userContentIcon" />
+              <h3>Security</h3>
+            </div>
+            <p>Manage your security settings and protect your account.</p>
 
-          {/* Change Password Section */}
-          <div className="security-section">
-            <h4>Change Password</h4>
-            <form className="passwordForm" onSubmit={handlePasswordChange}>
-              <label>Old Password</label>
-              <input
-                type="password"
-                name="oldPassword"
-                value={passwordInfo.oldPassword}
-                onChange={handlePasswordChangeInput}
-                className="userInput longInput"
-                placeholder="Old Password"
-              />
-              <label>New Password</label>
-              <input
-                type="password"
-                name="newPassword"
-                value={passwordInfo.newPassword}
-                onChange={handlePasswordChangeInput}
-                className="userInput longInput"
-                placeholder="New Password"
-              />
-              <button type="submit" className="userButton">Change Password</button>
-            </form>
-          </div>
+            {/* Change Password Section */}
+            <div className="security-section">
+              <h4>Change Password</h4>
+              <form className="passwordForm" onSubmit={handlePasswordChange}>
+                <label>Old Password</label>
+                <input
+                  type="password"
+                  name="oldPassword"
+                  value={passwordInfo.oldPassword}
+                  onChange={handlePasswordChangeInput}
+                  className="userInput longInput"
+                  placeholder="Old Password"
+                />
+                <label>New Password</label>
+                <input
+                  type="password"
+                  name="newPassword"
+                  value={passwordInfo.newPassword}
+                  onChange={handlePasswordChangeInput}
+                  className="userInput longInput"
+                  placeholder="New Password"
+                />
+                <button type="submit" className="userButton">Change Password</button>
+              </form>
+            </div>
 
-          {/* Two-factor Authentication Section */}
-          {/* <div className="security-section">
+            {/* Two-factor Authentication Section */}
+            {/* <div className="security-section">
             <h4>Two-factor Authentication</h4>
             <button className="userButton">Set Up 2FA</button>
           </div> */}
 
-          {/* Active Sessions Section */}
-          {/* <div className="security-section">
+            {/* Active Sessions Section */}
+            {/* <div className="security-section">
             <h4>Active Sessions</h4>
             <button className="userButton">Sign Out of All Sessions</button>
           </div> */}
 
-          {/* Delete Account Section */}
-          {/* <div className="security-section">
+            {/* Delete Account Section */}
+            {/* <div className="security-section">
             <h4>Delete Account</h4>
             <button className="deleteButton">Delete Account</button>
           </div> */}
 
-          {/* Verify (National ID) Section */}
-          {/* <div className="security-section">
+            {/* Verify (National ID) Section */}
+            {/* <div className="security-section">
             <h4>Verify (National ID)</h4>
             <input type="file" className="userInput" onChange={handleFileChange} />
             {nationalIdPreview && (
@@ -249,19 +249,19 @@ const User = () => {
               </div>
             )}
           </div> */}
-        </div>
-        );
-      case "otherTravellers":
-        return (
-          <div className="userContent">
-            <div className="userContentHeader">
-              <FaUserFriends className="userContentIcon" />
-              <h3>Other travellers</h3>
-            </div>
-            <p>Add or edit information about the people you're travelling with.</p>
-            <button className="userButton">Manage travellers</button>
           </div>
         );
+      // case "otherTravellers":
+      //   return (
+      //     <div className="userContent">
+      //       <div className="userContentHeader">
+      //         <FaUserFriends className="userContentIcon" />
+      //         <h3>Other travellers</h3>
+      //       </div>
+      //       <p>Add or edit information about the people you're travelling with.</p>
+      //       <button className="userButton">Manage travellers</button>
+      //     </div>
+      //   );
       case "paymentDetails":
         return (
           <div className="userContent">
@@ -351,18 +351,18 @@ const User = () => {
             <button className="userButton" onClick={() => setView("otherTravellers")}>
               Other travellers
             </button>
-            <button className="userButton" onClick={() => setView("paymentDetails")}>
+            {/* <button className="userButton" onClick={() => setView("paymentDetails")}>
               Payment details
-            </button>
-            <button className="userButton" onClick={() => setView("emailNotifications")}>
+            </button> */}
+            {/* <button className="userButton" onClick={() => setView("emailNotifications")}>
               Email notifications
-            </button>
-            <button className="userButton" onClick={() => setView("booking")}>
+            </button> */}
+            {/* <button className="userButton" onClick={() => setView("booking")}>
               Bookings
-            </button>
-            <button className="userButton" onClick={() => setView("wishlist")}>
+            </button> */}
+            {/* <button className="userButton" onClick={() => setView("wishlist")}>
               Wishlist
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="userRight">{renderContent()}</div>

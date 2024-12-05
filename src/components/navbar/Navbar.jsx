@@ -53,19 +53,14 @@ const Navbar = () => {
                 <FiUser className="icon" />
                 {showDropdown && (
                   <div className="dropdown-menu">
-                    <Link to="/perdetail" className="dropdown-item">
-                      Profile
-                    </Link>
-                    <Link to="/booking" className="dropdown-item">
-                      Booking
-                    </Link>
+                   
                     <button className="dropdown-item" onClick={handleSignOut}>
                       Sign Out
                     </button>
                   </div>
                 )}
               </div>
-              <Link to="/perdetail" style={{ color: "inherit", textDecoration: "none" }}>
+              <Link to="" style={{ color: "inherit", textDecoration: "none" }}>
                 <span className="username">{user.username}</span>
               </Link>
             </>

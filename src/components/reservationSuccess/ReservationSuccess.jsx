@@ -8,9 +8,9 @@ const ReservationSuccess = () => {
       <h1>Reservation Successful!</h1>
       <p>Your reservation has been successfully placed. Thank you for choosing us!</p>
       <div className="reservation-success-buttons">
-        <Link to="/reservations-history">
+        {/* <Link to="/reservations-history">
           <button className="success-button">View Reservations</button>
-        </Link>
+        </Link> */} 
         <Link to="/">
           <button className="success-button">Go to Home</button>
         </Link>

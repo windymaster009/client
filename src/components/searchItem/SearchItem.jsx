@@ -14,13 +14,13 @@ const SearchItem = ({ item }) => {
         <span className="siDistance">
           {item.distance ? `Excellent location - ${item.distance}m from center` : "Location not available"}
         </span>
-        <span className="siTaxiOp">Free airport taxi</span>
+        <span className="siTaxiOp">For more information please click more </span>
         <span className="siSubtitle">{item.title || "No subtitle available"}</span>
         <span className="siFeatures">{item.desc || "No description available"}</span>
-        <span className="siCancelOp">Free cancellation</span>
-        <span className="siPrice">Starting from ${item.cheapestPrice || "N/A"}</span>
+        <span className="siCancelOp">Free cancellation at any time contact Hotel owner to cancel</span>
+        <span className="siPrice">Booking Price start from  ${item.cheapestPrice || "N/A"}</span>
         <Link to={`/hotels/${item._id}`}>
-          <button className="siCheckButton">See Availability</button>
+          <button className="siCheckButton">Click here for Booking</button>
         </Link>
       </div>
     </div>

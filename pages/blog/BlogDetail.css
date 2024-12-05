@@ -116,5 +116,17 @@
     .blogContent {
       font-size: 1rem;
     }
+    .galleryImages {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .galleryImage {
+      width: 200px;
+      height: auto;
+      border-radius: 5px;
+    }
+    
   }
   

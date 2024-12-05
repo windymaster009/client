@@ -1,72 +1,103 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import "./BlogDetail.css";
+import axios from "axios"; // Import Axios
+import "../blog/BlogDetail.css";
 import MailList from "../../components/mailList/MailList";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Headerbar";
 
 const BlogDetail = () => {
-  const { id } = useParams(); // Get the blog ID from the URL params
-  const [blog, setBlog] = useState(null); // Stores the blog details
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const { id } = useParams(); // Get the blog ID from the route
+  const [blog, setBlog] = useState(null);
+  const [nextPost, setNextPost] = useState(null);
+  const [prevPost, setPrevPost] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBlogDetail = async () => {
       try {
-        setLoading(true);
-        setError(null);
+        const response = await axios.get(`http://localhost:8800/api/blogs/${id}`); // Fetch blog by ID
+        console.log("Fetched Blog Detail:", response.data); // Debugging log
+        setBlog(response.data); // Set the fetched blog data
 
-        // Adjusted URL to include the full backend API base URL
-        const response = await axios.get(`/blogs/${id}`); // Corrected URL with full backend base URL
-        
-        console.log("Fetched Blog Detail:", response.data); // Log response for debugging
-
-        // Check if response structure is as expected
-        if (response.data && response.data._id) {
-          setBlog(response.data); // Set blog details from API response
-        } else {
-          setError("Blog not found"); // If data is not valid, show an error
-        }
+        // Fetch the next and previous blog posts
+        const prevResponse = await axios.get(`http://localhost:8800/api/blogs/prev/${id}`);
+        const nextResponse = await axios.get(`http://localhost:8800/api/blogs/next/${id}`);
+        setPrevPost(prevResponse.data);
+        setNextPost(nextResponse.data);
       } catch (error) {
-        setError("Error fetching blog detail"); // Handle errors
-        console.error("Error details:", error.response || error.message); // Log error response for debugging
-      } finally {
-        setLoading(false); // Set loading to false after the request
+        console.error("Error fetching blog detail", error);
       }
     };
 
-    fetchBlogDetail(); // Fetch the blog details on component mount
-  }, [id]); // Re-fetch when the blog ID changes
+    fetchBlogDetail();
+  }, [id]);
 
-  if (loading) return <div>Loading...</div>; // Show loading message
-  if (error) return <div>{error}</div>; // Show error message
-  if (!blog) return <div>Blog not found</div>; // Show message if blog not found
+  if (!blog) return <div>Loading...</div>; // Display loading state
+
+  // gallery is already an array, so we can use it directly
+  const galleryImages = Array.isArray(blog.gallery) ? blog.gallery : [];
 
   return (
-    <div className="blogDetailWrapper">
-      <div className="blogDetailContainer">
-        <div className="blogHeader">
-          <img src={blog.thumbnail} alt={blog.name} className="blogImage" />
-          <div className="blogTitleContainer">
-            <h1 className="blogTitle">{blog.name}</h1>
-            <p className="blogDate">
-              Published on {new Date(blog.createdAt).toLocaleDateString()}
-            </p>
+    <div>
+      <Navbar />
+      <Header type="list" />
+      <div className="blogDetailWrapper">
+        <div className="blogDetailContainer">
+          {/* Blog Header */}
+          <div className="blogHeader">
+            <img src={blog.thumbnail} alt={blog.name} className="blogImage" />
+            <div className="blogTitleContainer">
+              <h1 className="blogTitle">{blog.name}</h1>
+              <p className="blogDate">
+                Published on {new Date(blog.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+          </div>
+
+          {/* Blog Content */}
+          <div className="blogContentContainer">
+            <p className="blogContent">{blog.description}</p>
+          </div>
+
+          {/* Blog Gallery */}
+          {galleryImages.length > 0 && (
+            <div className="blogGalleryContainer">
+              <h2 className="galleryTitle">Gallery</h2>
+              <div className="galleryImages">
+                {galleryImages.map((imageUrl, index) => (
+                  <img
+                    key={index}
+                    src={imageUrl}
+                    alt={`Gallery Image ${index + 1}`}
+                    className="galleryImage"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Next and Previous Buttons */}
+          <div className="navigationButtons">
+            {prevPost && (
+              <button
+                className="navButton"
+                onClick={() => navigate(`/blog/${prevPost._id}`)}
+              >
+                Back
+              </button>
+            )}
+            {nextPost && (
+              <button
+                className="navButton"
+                onClick={() => navigate(`/blog/${nextPost._id}`)}
+              >
+                Next
+              </button>
+            )}
           </div>
         </div>
-
-        <div className="blogContentContainer">
-          <p className="blogContent">{blog.description}</p>
-          <div className="blogGallery">
-            {blog.gallery.split(',').map((imgUrl, index) => (
-              <img key={index} src={imgUrl} alt={`Gallery image ${index + 1}`} className="galleryImage" />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="mailListContainer">
-        <MailList />
+          <MailList />
       </div>
     </div>
   );

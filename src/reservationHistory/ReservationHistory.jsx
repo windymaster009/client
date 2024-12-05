@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const ReservationHistory = () => {
+const ReservationHistory = ({ userId, hotelId }) => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -9,23 +9,26 @@ const ReservationHistory = () => {
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        const response = await axios.get('/reservations', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        console.log(response.data); // Check the response data in the console
-        setReservations(response.data.data); // Ensure we're accessing the 'data' array
+        const response = await axios.get(
+          `http://localhost:8800/api/reservations/history/${userId}/${hotelId}`,
+          {
+            withCredentials: true, // Ensure cookies are sent with the request
+          }
+        );
+
+        console.log('Response:', response.data); // Debugging
+
+        setReservations(response.data.data || []);
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch reservation history');
         setLoading(false);
-        console.error(err);
+        console.error('Error:', err.response?.data || err.message || err);
       }
     };
 
     fetchReservations();
-  }, []);
+  }, [userId, hotelId]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -36,9 +39,9 @@ const ReservationHistory = () => {
       <table>
         <thead>
           <tr>
-            <th>User</th> {/* Column for user */}
+            <th>User</th>
             <th>Hotel</th>
-            <th>Rooms</th> {/* Column for room details */}
+            <th>Rooms</th>
             <th>Check-In Date</th>
             <th>Check-Out Date</th>
             <th>Status</th>
@@ -48,7 +51,6 @@ const ReservationHistory = () => {
           {reservations.map((reservation) => (
             <tr key={reservation._id}>
               <td>
-                {/* Display user details */}
                 {reservation.user ? (
                   <span>
                     {reservation.user.username} <br />
@@ -62,11 +64,10 @@ const ReservationHistory = () => {
                 {reservation.hotel ? reservation.hotel.name : 'Hotel not found'}
               </td>
               <td>
-                {/* Display room details with room names and IDs */}
                 {reservation.rooms && reservation.rooms.length > 0
                   ? reservation.rooms.map((room) => (
-                      <div key={room._id}>
-                        <strong>{room.name}</strong> (ID: {room._id})
+                      <div key={room.roomId}>
+                        <strong>{room.title || 'Unknown Room'}</strong> (ID: {room.roomId})
                       </div>
                     ))
                   : 'No rooms available'}

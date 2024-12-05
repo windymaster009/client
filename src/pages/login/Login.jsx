@@ -27,17 +27,17 @@ const Login = () => {
     }
   };
 
-  const handleGoogleSuccess = async (credentialResponse) => {
-    dispatch({ type: "LOGIN_START" });
-    try {
-      const res = await axios.post("/auth/google", { token: credentialResponse.credential });
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-      navigate("/");
-    } catch (err) {
-      console.error("Google Login Error:", err);
-      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
-    }
-  };
+  // const handleGoogleSuccess = async (credentialResponse) => {
+  //   dispatch({ type: "LOGIN_START" });
+  //   try {
+  //     const res = await axios.post("/auth/google", { token: credentialResponse.credential });
+  //     dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+  //     navigate("/");
+  //   } catch (err) {
+  //     console.error("Google Login Error:", err);
+  //     dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+  //   }
+  // };
 
   return (
     <div className="login">
@@ -71,11 +71,11 @@ const Login = () => {
           <a href="/forgot-password">Forgot Password?</a>
         </div>
         {error && <span className="lError">{error.message}</span>}
-        <div className="googleLogin">
-          <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+        {/* <div className="googleLogin">
+          <GoogleOAuthProvider clientId="1024106569318-5hlbu74tfugfq5n3sm4ihai22vtjr16o.apps.googleusercontent.com">
             <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => console.error("Google Login Failed")} />
           </GoogleOAuthProvider>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-.mail{
+/* .mail{
   width: 100%;
   margin-top: 50px;
   background-color: #003580;
@@ -27,4 +27,64 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+} */
+
+.mail {
+  width: 100000px;
+  margin-top: 50px;
+  background-color: #003580; /* Dark blue background */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 50px 20px; /* Add horizontal padding for small screens */
+  box-sizing: border-box;
+}
+
+.mailInputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Ensure spacing between input and button */
+}
+
+.mailInputContainer > input {
+  width: 300px; /* Fixed width for input */
+  max-width: 100%; /* Responsive handling for small screens */
+  height: 40px; /* Slightly increased height for balance */
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 0; /* Remove unnecessary margins */
+  box-sizing: border-box;
+}
+
+.mailInputContainer > button {
+  height: 40px; /* Match the height of the input */
+  background-color: #0071c2; /* Slightly lighter blue for contrast */
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  padding: 0 20px; /* Add horizontal padding for better size */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mailInputContainer > button:hover {
+  background-color: #0d71d4; /* Darker blue on hover for better UX */
+}
+
+/* Additional adjustments for responsiveness */
+@media (max-width: 768px) {
+  .mailInputContainer {
+    flex-direction: column; /* Stack input and button on small screens */
+    gap: 15px;
+  }
+
+  .mailInputContainer > input, 
+  .mailInputContainer > button {
+    width: 100%; /* Full width for better responsiveness */
+  }
 }
