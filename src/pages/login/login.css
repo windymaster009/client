@@ -83,3 +83,102 @@
   text-align: center;
   margin-top: 10px;
 }
+
+/* General CAPTCHA container styling */
+.captchaContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between text and logo */
+  gap: 10px;
+  margin: 20px 0;
+  cursor: pointer;
+  user-select: none;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.captchaContainer:hover {
+  border-color: #bbb;
+}
+
+/* Initial checkbox */
+.captchaBox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  position: relative;
+}
+
+.captchaBox.checked {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.captchaCheckMark {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.captchaBox.checked .captchaCheckMark {
+  opacity: 1;
+}
+
+/* Loading spinner */
+.captchaSpinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #2196f3;
+  animation: spin 1s linear infinite;
+}
+
+/* Blue spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade-in checkmark */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* CAPTCHA text */
+.captchaText {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* CAPTCHA logo */
+.captchaLogo {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.captchaLogo img {
+  height: 55px; /* Increased size for a realistic look */
+  width: auto;
+}
